@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>回顾Object.defineProperty方法</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            let number = 18
+            let person = {
+                name:"wangyu",
+                sex:"male"
+            }
+            // 这种形式的age是不参与遍历的
+            Object.defineProperty(person,"age",{
+                // value:18,
+                // enumerable:true,//控制属性是否可以被遍历，默认为false
+                // writable:true, // 控制属性是否可修改，默认为false
+                // configurable:true, // 控制属性是否可以被删除，默认为false
+                get:function(){
+                    return number
+                },
+                set(value){
+                    number = value
+                }
+            })
+            for (const key in person) {
+                if (Object.hasOwnProperty.call(person, key)) {
+                    const element = person[key];
+                    console.log(element)
+                }
+            }
+            console.log(person)
+        </script>
+    </body>
+</html>

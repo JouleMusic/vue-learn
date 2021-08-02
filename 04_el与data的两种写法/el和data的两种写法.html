@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <title>数据绑定</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <!-- 
+        v-model只能用于表单类元素（用户可以输入的）
+        由Vue管理的函数，不能用箭头函数 =>
+     -->
+            <!-- 先创建一个容器 -->
+            <div id="root">
+                <h1>鬼谷子,{{name}}</h1>
+            </div>
+    
+            <script type="text/javascript">
+                Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+    
+            // const v = new Vue({
+            //     // el:'#root', // 第一种写法
+            //     data:{
+            //         name:"jack"
+            //     }
+            // })  
+            // console.log(v)
+            // v.$mount("#root") // 第二种写法
+
+            new Vue({
+                el:"#root",
+                // data:{ //data的第一种写法：对象式
+                //     name:"jack"
+                // }
+                data:function(){ // 第二种写法：函数式
+                    console.log('@@@@@',this)
+                    return{
+                        name:"jack"
+                    }
+                }
+            })
+            </script>
+        </body>
+</html>

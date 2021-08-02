@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>初始Vue</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            1. 先创建一个Vue实例，而且要传入一个配置对象
+            2. root容器里的代码仍然符合html规范，但包含了一些特殊的Vue语法
+            3. root容器里的代码被称为Vue模板
+            4. vue实例和容器是一一对应的
+            5. 真实开发中，只有一个Vue实例，并且会配合组件一起使用
+            6. 一旦data中的数据发生改变，页面中用到该数据的地方也会自动更新
+            注意区分：Js表达式 和 Js代码（语句）
+               表达式：会产生一个值
+               js语句：if(){}/for(){}
+         -->
+        <!-- 先创建一个容器 -->
+        <div id="root">
+            <h1>hello,{{name.toUpperCase()}}</h1>
+        </div>
+        <script type="text/javascript">
+            Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+        // 创建Vue实例
+        new Vue({
+            el:'#root', // 将Vue实例与容器绑定了，当前实例为哪个容器服务，值通常为css选择器字符串
+            data:{ //data中用于存储数据，数据供EL所指定的容器取、去使用
+                name:'山鬼ghost'
+            }
+
+        })
+
+        </script>
+    </body>
+</html>
