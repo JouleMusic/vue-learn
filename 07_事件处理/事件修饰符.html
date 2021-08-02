@@ -29,7 +29,7 @@
                 <!-- prevent是click事件的修饰符，阻止事件的默认行为（跳转到baidu） -->
                 <a href="https://www.baidu.com/" @click.prevent="showInfo">点我提示信息</a>
                 <div class="demo1" @click="showInfo">
-                    <button @click="showInfo">点我提示信息</button>
+                    <button @click.stop="showInfo">点我提示信息</button>
                 </div>
             </div>
     
