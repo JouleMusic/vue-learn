@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <title>天气案例</title>
+        <style>
+            .basic{
+                border: solid black 2px;
+                height: 40px;
+                width: 20%;
+                font-size: 20px;
+            }
+            .normal{
+                border: solid blue 2px;
+                height: 40px;
+                width: 20%;
+                font-size: 20px;
+                background-color: crimson;
+            }
+            .happy{
+                border: solid pink 2px;
+                height: 40px;
+                width: 20%;
+                font-size: 20px;
+                background-color: yellow;
+            }
+        </style>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <!-- 
+
+     -->
+     <body>
+          <!-- 先创建一个容器 -->
+          <div id="root">
+              <!-- 绑定class样式，字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+              <div class="basic" :class="mood" @click="changeMood">{{name}}</div> </br>
+              <!-- 绑定class样式，数组写法，适用于：要绑定的样式个数和名字都不一定 -->
+              <div class="basic" :class="classArr">{{name}}</div> </br>
+              <!-- 绑定class样式，对象写法，适用于：要绑定的样式个数和名字确定，但要动态决定用不用 -->
+              <div class="basic" :class="classObj">{{name}}</div> </br>
+
+              <div class="basic" :style="styleObj">{{name}}</div>
+          </div>
+
+     </body>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+        
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'Shanghai',
+                mood:"normal",
+                classArr:["normal","basic","happy"],
+                classObj:{
+                    normal:false,
+                    happy:false,
+                },
+                styleObj:{
+                    fontSize:'30px'
+                }
+            },
+            methods: {
+                changeMood(){
+                    const arr = ['happy','normal','basic']
+                    this.mood = arr[Math.floor(Math.random()*3)]
+                }
+            },
+        })
+
+    </script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <title>computed与watch的区别</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <!-- 
+        computed与watch的区别
+            1. computed能完成的功能，watch都可以完成
+            2. watch能完成的功能，computed不一定能完成，例如watch可以进行异步操作
+        两个重要的小原则：
+            1. 所有被vue管理的函数，最好写成普通函数，这样this的指向才是vm或者组件实例对象
+            2. 所有不被vm管理的函数，（比如定时器的回调韩寒诉，ajax的回调函数等），最好写成箭头函数，这样会向外层寻找this的指向，就变成了vm或者组件实例对象
+
+     -->
+     <body>
+          <!-- 先创建一个容器 -->
+          <div id="root">
+            <h2>今天天气很{{info}}</h2>
+            <button @click="changeWeather">切换天气</button>
+            <hr/>
+            <h2>a:{{numbers.a}}</h2>
+            <button @click="addOne">a添加1</button>
+            <hr/>
+            <h2>b:{{numbers.b}}</h2>
+            <button @click="numbers.b++">b添加1</button>
+        </div>
+     </body>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+        
+        const vm = new Vue({
+            el:'#root',
+            data: {
+                isHot:true,
+                numbers:{
+                    a:1,
+                    b:1
+                }
+            },
+            computed:{
+                info:function(){
+                    return this.isHot ? '炎热' : '凉爽'
+            },
+
+            },
+            methods: {
+                changeWeather(){
+                    this.isHot = !this.isHot
+                },
+                addOne(){
+                    this.numbers.a += 1
+                }
+            },
+            watch:{
+                isHot:{
+                    immediate:true, // 初始化时调用handler
+                    handler(newValue,oldValue){
+                        console.log('isHot被修改了',newValue,oldValue)
+                    }
+                },
+                //监视多级结构中某个属性的变化
+                'numbers.a':{
+                   handler(){
+                       console.log('a被改变了')
+                   } 
+                },
+                numbers:{
+                    // 只要numbers中任意一个属性改变了就认为numbers改变了
+                    deep:true,
+                    handler(){
+                        console.log("numbers改变了")
+                    }
+                }
+            }
+        })
+    </script>
+</html>

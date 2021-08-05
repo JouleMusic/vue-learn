@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <title>标题</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <!-- 
+
+     -->
+     <body>
+          <!-- 先创建一个容器 -->
+          <div id="root">
+           姓：<input type="text" v-model:value="firstName"> <br/>
+           名：<input type="text" v-model:value="lastName"> <br/>
+           姓名：<span>{{fullName}}</span>
+        </div>
+     </body>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+        
+        new Vue({
+            el:'#root',
+            data: {
+                firstName:'张',
+                lastName:'三'
+            },
+            // 完成写法
+            // computed:{
+            //     fullName:{
+            //         get(){
+            //             console.log("get被调用了")
+            //           return this.firstName + '-' + this.lastName  
+            //         },
+            //         set(value){
+            //             const arr = value.split('-')
+            //             this.firstName = arr[0]
+            //             this.lastName = arr[1]
+            //         }
+            //     }
+            // }
+            //简写
+            computed:{
+                fullName:function(){
+                    return this.firstName + '-' + this.lastName
+            }
+            }
+        
+        })
+    
+    </script>
+</html>
